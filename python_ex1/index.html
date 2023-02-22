@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Python Ex1 - DevOps Course Sep 22</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Python Ex1";
+        var mkdocs_page_input_path = "python_ex1.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> DevOps Course Sep 22
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linux_ex1/">Linux Ex1</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../linux_ex2/">Linux Ex2</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Python Ex1</a>
+    <ul class="current">
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">DevOps Course Sep 22</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Python Ex1</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="poly-youtube-telegram-bot">Poly YouTube Telegram Bot</h1>
+<p>Due date: </p>
+<p><strong>Can be done in pairs!</strong></p>
+<h1 id="background">Background</h1>
+<p>Your goal in this exercise is to design and develop Telegram bot which will serve YouTube content. </p>
+<h2 id="part-1-create-the-environment">Part 1 - Create the environment</h2>
+<ol>
+<li>Fork <a href="https://github.com/ronhadad22/PolyBot.git">The PolyBot</a> repo (learn about <a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">forking a repo</a> in GitHub)</li>
+<li>Clone your <strong>forked repo</strong> locally into PyCharm (Git -&gt; Clone...)</li>
+<li><a href="https://www.jetbrains.com/help/pycharm/creating-virtual-environment.html">Create Python venv</a> for the project</li>
+<li>Install requirements by <code>pip install -r requirements.txt</code></li>
+</ol>
+<h2 id="part-2-create-a-telegram-bot">Part 2 - Create a Telegram Bot</h2>
+<ol>
+<li><a href="https://desktop.telegram.org/" target="_blank">Download</a> and install telegram desktop (you can use your phone app as well).</li>
+<li>Once installed, follow <a href="https://core.telegram.org/bots#6-botfather">this section</a> to create a bot. You should follow until “Generating an authentication token” (not including that section)</li>
+<li><a href="https://www.geeksforgeeks.org/create-a-telegram-bot-using-python/" target="_blank">Better instruction</a> </li>
+</ol>
+<p><img alt="telegramBot" src="/job-interview/img/telegramToken.png" /></p>
+<p>At this point, you should have your own bot, as well as the API token. <strong>Never</strong> commit sensitive data like secrets in Git repo. For now, save the token in a file called <code>.telegramToken</code> and add this file to <code>.gitignore</code> to exclude it completely from Git index. We will later learn that the place to store sensitive data is the cloud (AWS in our case).</p>
+<h2 id="part-3-running-a-simple-echo-bot">Part 3 - Running a simple “echo” Bot</h2>
+<h3 id="the-class-bot">The class <em>Bot</em></h3>
+<p>Under <code>bot.py</code> you are given a class called <code>Bot</code>. This class handles a simple telegram bot, as follows:  </p>
+<p>The constructor <code>__init__</code> gets <code>token</code> arg which is the bot token you have just received from Telegram. Inside the constructor, an Updater object is created, and the function <code>self._message_handler</code> is set as main msg handler, this function is getting called whenever a new message will be sent to the bot.</p>
+<p>The default behaviour of Bot class is to “echo” the incoming messages. 
+Run the program and send a message to the bot via Telegram app, observe the response and get an idea of how <code>_message_handler</code> is functioning (it's recommended to run in debug mode with breakpoints).</p>
+<h2 id="part-4-extending-the-echo-bot">Part 4 - Extending the echo bot</h2>
+<h3 id="the-class-quotebot">The class <em>QuoteBot</em></h3>
+<p>In <code>bot.py</code> you are given a class called <code>QuoteBot</code> which inherits from <code>Bot</code>. Upon incoming messages, this bot echoing the message while quoting the original message, unless the user is asking politely not to quote.
+Run this bot and check its behavior.</p>
+<h2 id="part-5-build-your-youtube-bot">Part 5 - Build your YouTube Bot</h2>
+<h3 id="the-class-youtubebot">The class <em>YoutubeBot</em></h3>
+<p>In <code>bot.py</code> you are given a class called <code>YoutubeBot</code> which inherits from <code>Bot</code>.
+Upon incoming messages, this class will take the message text, search and download corresponding Youtube video(s), the bot will then send the video file to the user.</p>
+<ol>
+<li>Inside <code>YoutubeBot</code> class, override <code>_message_handler</code> method and implement the functionality that is needed to download video from youtube and send it to the user (utilize <code>search_download_youtube_video</code> in <code>utils.py</code>).</li>
+<li>Remember that by inheriting the Bot class, you can use all of its methods (such as send_video or send_text).</li>
+<li>(Optional) Feel free to add more functionality e.g. implement a logic that caches videos that have already been downloaded, such that it will use the local copy when user requests the same video again. </li>
+</ol>
+<h2 id="part-6-containerize-your-app">Part 6 - Containerize your app</h2>
+<ol>
+<li>In your root directory of you repo, open <code>Dockerfile</code> and fill out the file such that the Bot app can be run as a Docker container</li>
+<li>Build and run the container locally, make sure it works well. </li>
+</ol>
+<h2 id="part-7-jenkins-optional">Part 7 - jenkins - optional</h2>
+<ol>
+<li>install jenkins </li>
+<li>In your PolyBot repository, in branch main, create a Jenkinsfile in the root directory as the following template. Commit and push your changes.
+To set up a webhook from GitHub to the Jenkins server, on your GitHub repository page, go to Settings. From there, click Webhooks, then Add webhook.
+In the Payload URL field, type http://<jenkins-ip>:8080/github-webhook/. In the Content type select: application/json and leave the Secret field empty.
+Choose the following events to be sent in the webhook:
+Pushes
+Pull requests
+From the main Jenkins dashboard page, choose New Item.
+Enter BotBuild as the project name, and choose Pipeline.
+Check GitHub project and enter the URL of your GitHub repo.
+Under Build Triggers check GitHub hook trigger for GITScm polling.
+Under Pipeline choose Pipeline script from SCM.
+Choose Git as your SCM, and enter the repo URL.
+If you don't have yet credentials to GitHub, choose Add and create Jenkins credentials.
+Kind must be Username and password
+Choose informative Username (as github or something similar)
+The Password should be a GitHub Personal Access Token with the following scope:
+repo,read:user,user:email,write:repo_hook</li>
+</ol>
+<p>Click here to create a token with this scope.
+Enter github as the credentials ID.
+Click Add.
+Under Branches to build enter main as we want this pipeline to be triggered upon changes in branch main.
+Under Script Path write the path to your Jenkinsfile defining this pipeline.
+Save the pipeline.
+Test the integration by add a sh step to the Jenkinsfile, commit &amp; push and see the triggered activity in Jenkins Blue Ocean.
+3. Build the Bot app
+If you don't have yet, create a private registry in Docker Hub for the Bot app.
+In the registry page, use the View push commands to implement a build step in your Jenkinsfile. The step may be seen like:
+stage('Build Bot app') {
+   steps {
+       sh '''
+            docker login --username &lt;&gt; ....
+            docker build ...
+            docker tag ...
+            docker push ...
+       '''
+   }
+}</p>
+<p>You can use the timestamp, or the BUILD_NUMBER or BUILD_TAG environment variables to tag your Docker images, but don't tag the images as latest.
+Use the environment directive to store global variable
+Clean the build artifacts from Jenkins server
+As for now, we build the Docker images in the system of the Jenkins server itself, which is a very bad idea (why?).
+Use the post{ always{} } directive to cleanup the built Docker images from the disk.</p>
+<ol>
+<li>addition optional steps:
+add unit tests to your app and add testing stage to your app
+change your agent to docker agent
+convert the Jenkinsfile to scripted Scripted_jenkinsfile </li>
+</ol>
+<h1 id="good-luck">Good Luck</h1>
+<p>Don't hesitate to ask any questions
+ron.hadad1@kyndryl.com</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../linux_ex2/" class="btn btn-neutral float-left" title="Linux Ex2"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../linux_ex2/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
